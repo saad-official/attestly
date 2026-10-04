@@ -147,7 +147,7 @@ export function Confidence({ value }: { value: number | null }) {
 /** "Document › 4.2 Heading" breadcrumb, the citation path used across the product. */
 export function HeadingPath({ parts, className }: { parts: string[]; className?: string }) {
   return (
-    <p className={cn("font-mono text-[0.6875rem] leading-relaxed text-muted-foreground", className)}>
+    <span className={cn("block font-mono text-[0.6875rem] leading-relaxed text-muted-foreground", className)}>
       {parts.map((p, i) => (
         <span key={p}>
           {i > 0 ? (
@@ -159,7 +159,7 @@ export function HeadingPath({ parts, className }: { parts: string[]; className?:
           <span className={i === parts.length - 1 ? "text-foreground" : undefined}>{p}</span>
         </span>
       ))}
-    </p>
+    </span>
   );
 }
 
