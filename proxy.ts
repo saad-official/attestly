@@ -2,7 +2,7 @@ import { getSessionCookie } from "better-auth/cookies";
 import { NextResponse, type NextRequest } from "next/server";
 
 /** Paths that require a signed-in user. */
-const PROTECTED_PREFIXES = ["/dashboard", "/sites", "/scans", "/settings", "/billing"];
+const PROTECTED_PREFIXES = ["/dashboard", "/questionnaires", "/knowledge", "/library", "/settings", "/billing"];
 
 /** Paths a signed-in user is bounced away from. */
 const AUTH_PATHS = ["/sign-in", "/sign-up"];
