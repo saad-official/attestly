@@ -25,3 +25,21 @@ pnpm dev
 ## Docs
 
 - [Spec](docs/spec.md) · [Plan](docs/plan.md)
+
+## Live demo
+
+https://tryattestly.vercel.app · Stripe runs in test mode (card `4242 4242 4242 4242`).
+
+1. Sign up (no card). On the empty dashboard, click **Load demo workspace**: six synthetic policies for the fictional "Northbeam Software" are chunked and embedded, and a 40-question "Acme Corp" questionnaire is created.
+2. The review page starts drafting in batches (Groq `gpt-oss-20b`, 15 questions per batch, paused and resumed from the page). Each draft carries a confidence and numbered citations; click a citation to see the exact passage with the quoted sentence highlighted.
+3. Questions with no supporting passage become **Needs evidence** tasks; the dashboard groups them into knowledge gaps (the policy to write next).
+4. Approve one answer at a time (A / E / Enter shortcuts) or **Approve N** above a confidence threshold. Approved answers join the answer library and are reused on the next questionnaire.
+5. Export as CSV on Free. XLSX round-trip into the customer's original workbook, read-only share links and team notes are Pro.
+
+Verified end to end on 4 Oct 2026 against the production Neon database: 40 questions drafted, 24 approved, cron and Stripe webhook routes answer correctly.
+
+## Known gaps
+
+- Bulk approve is sequential (about 3 s per answer on Neon); a batched update is the next optimisation.
+- Groq's free tier (30 requests and 8K tokens a minute) makes a full 40-question draft take several minutes; the runner shows progress and can be paused.
+- Share links and XLSX export need the Pro plan, so the public share page is only reachable after a test-mode checkout.
